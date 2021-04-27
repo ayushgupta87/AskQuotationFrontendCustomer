@@ -19,7 +19,7 @@ class _ShopByCategoryState extends State<ShopByCategory> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.width * 0.09,
+              height: MediaQuery.of(context).size.width * 0.12,
             ),
             Container(
               width: MediaQuery.of(context).size.width,

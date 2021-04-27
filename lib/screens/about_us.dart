@@ -8,14 +8,13 @@ class AboutUsPage extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.09,
+            height: MediaQuery.of(context).size.width * 0.12,
           ),
           Container(
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.03),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
                   child: Icon(
@@ -25,6 +24,8 @@ class AboutUsPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.25,),
+                Image.asset(companyPngImage, width: MediaQuery.of(context).size.width * 0.3),
               ],
             ),
           ),
