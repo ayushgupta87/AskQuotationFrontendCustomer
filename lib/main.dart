@@ -5,7 +5,7 @@ import 'package:ask_quotation_customer/screens/loginpage.dart';
 import 'package:ask_quotation_customer/screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 
-void main(){
+void main() {
   runApp(MyApp());
 }
 

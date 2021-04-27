@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.kaizeninnovations.ask_quotation_customer">
+    package="com.kaizeninnovations.ask_quotation_customer">
    <application
         android:label="ask_quotation_customer"
         android:icon="@mipmap/ic_launcher">

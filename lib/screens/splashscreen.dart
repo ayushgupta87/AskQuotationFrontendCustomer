@@ -25,14 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
                     companyName[0],
                     style: TextStyle(
                         color: Colors.yellow,
-                        fontSize: MediaQuery.of(context).size.width * 0.08,
+                        fontSize: MediaQuery.of(context).size.width * 0.06,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     companyName.substring(1),
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width * 0.08,
+                        fontSize: MediaQuery.of(context).size.width * 0.06,
                         fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -52,20 +52,20 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.width * 0.12),
+                      fontSize: MediaQuery.of(context).size.width * 0.11),
                 ),
                 Text('Quotation',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.width * 0.12)),
+                        fontSize: MediaQuery.of(context).size.width * 0.11)),
                 Text('System',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.width * 0.12)),
+                        fontSize: MediaQuery.of(context).size.width * 0.11)),
                 SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
+                  height: MediaQuery.of(context).size.width * 0.04,
                 ),
                 Text(
                   '// $companyTagline',
@@ -73,9 +73,12 @@ class _SplashScreenState extends State<SplashScreen> {
                       color: Colors.white,
                       fontSize: MediaQuery.of(context).size.width * 0.04,
                       fontWeight: FontWeight.bold,
-                      wordSpacing: 1, letterSpacing: 4),
+                      wordSpacing: 1,
+                      letterSpacing: 4),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.09,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.2,
                   child: SpinKitThreeBounce(
