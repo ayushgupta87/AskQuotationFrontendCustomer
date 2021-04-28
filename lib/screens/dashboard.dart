@@ -1,4 +1,5 @@
 import 'package:ask_quotation_customer/screens/about_us.dart';
+import 'package:ask_quotation_customer/screens/all_products_page.dart';
 import 'package:ask_quotation_customer/screens/contact_us.dart';
 import 'package:ask_quotation_customer/screens/homescreen.dart';
 import 'package:ask_quotation_customer/screens/shop_be_categories_page.dart';
@@ -52,6 +53,11 @@ class DashBoard extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
+                              if (element['title'] == 'All Products'){
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  return AllProductsPage();
+                                }));
+                              }
                               if (element['title'] == 'Shop by categories') {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
