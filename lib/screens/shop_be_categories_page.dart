@@ -51,64 +51,68 @@ class _ShopByCategoryState extends State<ShopByCategory> {
                   return Padding(
                     padding: const EdgeInsets.only(
                         bottom: 10.0, right: 10, left: 10),
-                    child: Container(
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                              top: 10,
-                              left: 225,
-                              bottom: -50,
+                    child: AspectRatio(
+                      aspectRatio: 15 / 5,
+                      child: Container(
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                                top: 10,
+                                left: 225,
+                                bottom: -50,
+                                child: Container(
+                                  child: ColorFiltered(
+                                      colorFilter: ColorFilter.mode(
+                                          Colors.black.withOpacity(0.4),
+                                          BlendMode.dstIn),
+                                      child: Image.asset(companyPngImage)),
+                                  decoration: BoxDecoration(
+                                      boxShadow: customShadow,
+                                      color: Colors.white38,
+                                      shape: BoxShape.circle),
+                                )),
+                            Positioned.fill(
+                              right: MediaQuery.of(context).size.width * 0.6,
                               child: Container(
-                                child: ColorFiltered(
-                                    colorFilter: ColorFilter.mode(
-                                        Colors.black.withOpacity(0.4),
-                                        BlendMode.dstIn),
-                                    child: Image.asset(companyPngImage)),
+                                width: 300,
+                                height: 300,
                                 decoration: BoxDecoration(
-                                    boxShadow: customShadow,
-                                    color: Colors.white38,
-                                    shape: BoxShape.circle),
-                              )),
-                          Positioned.fill(
-                            right: MediaQuery.of(context).size.width * 0.6,
-                            child: Container(
-                              width: 300,
-                              height: 300,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Image.asset(companyPngImage)),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Align(
+                                    alignment: Alignment.center,
+                                    child: Image.asset(companyPngImage)),
+                              ),
                             ),
-                          ),
-                          Positioned.fill(
-                            left: 160,
-                            top: -50,
-                            child: Container(
-                              // decoration: BoxDecoration(
-                              //     color: Colors.white,
-                              //     borderRadius: BorderRadius.circular(10)
-                              // ),
-                              child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    'Item Name',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:
-                                            MediaQuery.of(context).size.width *
-                                                0.04),
-                                  )),
+                            Positioned.fill(
+                              left: 160,
+                              top: -50,
+                              child: Container(
+                                // decoration: BoxDecoration(
+                                //     color: Colors.white,
+                                //     borderRadius: BorderRadius.circular(10)
+                                // ),
+                                child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Item Name',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.04),
+                                    )),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      height: MediaQuery.of(context).size.width * 0.3,
-                      decoration: BoxDecoration(
-                        boxShadow: customShadow,
-                        color: Colors.grey[200],
+                          ],
+                        ),
+                        height: MediaQuery.of(context).size.width * 0.3,
+                        decoration: BoxDecoration(
+                          boxShadow: customShadow,
+                          color: Colors.grey[200],
+                        ),
                       ),
                     ),
                   );
