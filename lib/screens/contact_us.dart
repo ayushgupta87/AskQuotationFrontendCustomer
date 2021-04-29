@@ -48,189 +48,204 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.width * 0.12,
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.03),
-            child: Row(
-              children: [
-                GestureDetector(
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.25,),
-                Image.asset(companyPngImage, width: MediaQuery.of(context).size.width * 0.3),
-              ],
+      body: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          // Note: Sensitivity is integer used when you don't want to mess up vertical drag
+          int sensitivity = 20;
+          if (details.delta.dx > sensitivity) {
+            Navigator.pop(context);
+          } else if (details.delta.dx < -sensitivity) {}
+        },
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.width * 0.12,
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Let\'s get in touch.',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                      ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.03),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    child: Icon(
+                      Icons.arrow_back_ios,
                     ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            Text(
-                              '$companyCountry (Head Office)',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            Divider(
-                              height: 10,
-                              color: Colors.grey,
-                            ),
-                            Text(
-                              companyName.toUpperCase(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.width * 0.03,
-                            ),
-                            Text(
-                              companyAddress,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: MediaQuery.of(context).size.width *
-                                      0.035),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.width * 0.06,
-                            ),
-                            FlatButton(
-                              child: Text(
-                                'Find Us on Maps',
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.035,
-                                    color: Colors.white),
-                              ),
-                              onPressed: () {
-                                MaplaunchURL();
-                              },
-                              color: Colors.black,
-                            ),
-                            FlatButton(
-                              child: Text(
-                                'Register yourself on our official website',
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.035,
-                                    color: Colors.white),
-                              ),
-                              onPressed: () {
-                                _launchUrl(companyURL);
-                              },
-                              color: Colors.black,
-                            ),
-                          ],
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.25,
+                  ),
+                  Image.asset(companyPngImage,
+                      width: MediaQuery.of(context).size.width * 0.3),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: SafeArea(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'Let\'s get in touch.',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Center(
+                      Container(
+                        alignment: Alignment.bottomCenter,
                         child: Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            'Weather you have a question about our products, trials, pricing, need solution for problem, or anything else, our team is ready to answer all your questions.',
-                            softWrap: true,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black54,
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Text(
+                                '$companyCountry (Head Office)',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Divider(
+                                height: 10,
+                                color: Colors.grey,
+                              ),
+                              Text(
+                                companyName.toUpperCase(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.03,
+                              ),
+                              Text(
+                                companyAddress,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.035),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.06,
+                              ),
+                              FlatButton(
+                                child: Text(
+                                  'Find Us on Maps',
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.035,
+                                      color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  MaplaunchURL();
+                                },
+                                color: Colors.black,
+                              ),
+                              FlatButton(
+                                child: Text(
+                                  'Register yourself on our official website',
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.035,
+                                      color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  _launchUrl(companyURL);
+                                },
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Text(
+                              'Weather you have a question about our products, trials, pricing, need solution for problem, or anything else, our team is ready to answer all your questions.',
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black54,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Card(
-                      elevation: 10,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Icon(FontAwesomeIcons.whatsapp),
-                              onTap: () {
-                                print('whatsapp open');
-                                _launchUrl("https://wa.me/$contactNumber");
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(FontAwesomeIcons.facebook),
-                              onTap: () {
-                                print('fb open');
-                                _launchUrl(facebookURL);
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(FontAwesomeIcons.instagram),
-                              onTap: () {
-                                print('insta open');
-                                _launchUrl(instaURL);
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(FontAwesomeIcons.mailBulk),
-                              onTap: () {
-                                print('email open');
-                                _launchEmail(emailAddress);
-                              },
-                            ),
-                            GestureDetector(
-                              child: Icon(FontAwesomeIcons.phone),
-                              onTap: () {
-                                print('phone open');
-                                _launchCaller(contactNumber);
-                              },
-                            ),
-                          ],
+                      Card(
+                        elevation: 10,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              GestureDetector(
+                                child: Icon(FontAwesomeIcons.whatsapp),
+                                onTap: () {
+                                  print('whatsapp open');
+                                  _launchUrl("https://wa.me/$contactNumber");
+                                },
+                              ),
+                              GestureDetector(
+                                child: Icon(FontAwesomeIcons.facebook),
+                                onTap: () {
+                                  print('fb open');
+                                  _launchUrl(facebookURL);
+                                },
+                              ),
+                              GestureDetector(
+                                child: Icon(FontAwesomeIcons.instagram),
+                                onTap: () {
+                                  print('insta open');
+                                  _launchUrl(instaURL);
+                                },
+                              ),
+                              GestureDetector(
+                                child: Icon(FontAwesomeIcons.mailBulk),
+                                onTap: () {
+                                  print('email open');
+                                  _launchEmail(emailAddress);
+                                },
+                              ),
+                              GestureDetector(
+                                child: Icon(FontAwesomeIcons.phone),
+                                onTap: () {
+                                  print('phone open');
+                                  _launchCaller(contactNumber);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text(' '),
-                    ),
-                  ],
+                      Expanded(
+                        flex: 1,
+                        child: Text(' '),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

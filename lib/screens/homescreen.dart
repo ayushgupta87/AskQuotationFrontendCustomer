@@ -22,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       // ignore: missing_return
-    onWillPop: (){
-        if (isDrawerOpen == true){
+      onWillPop: () {
+        if (isDrawerOpen == true) {
           setState(() {
             setState(() {
               xOffset = 0;
@@ -39,17 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
           // Note: Sensitivity is integer used when you don't want to mess up vertical drag
           int sensitivity = 8;
           if (details.delta.dx > sensitivity) {
-
             setState(() {
-              xOffset =
-                  MediaQuery.of(context).size.width * 0.55;
+              xOffset = MediaQuery.of(context).size.width * 0.55;
               yOffset = 150;
               scaleFactor = 0.6;
               isDrawerOpen = true;
             });
-
-          } else if(details.delta.dx < -sensitivity){
-
+          } else if (details.delta.dx < -sensitivity) {
             setState(() {
               xOffset = 0;
               yOffset = 0;
@@ -95,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () {
                                   setState(() {
                                     xOffset =
-                                        MediaQuery.of(context).size.width * 0.55;
+                                        MediaQuery.of(context).size.width *
+                                            0.55;
                                     yOffset = 150;
                                     scaleFactor = 0.6;
                                     isDrawerOpen = true;
@@ -146,7 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: AssetImage('images/banner-sample.jpg'))),
+                                  image:
+                                      AssetImage('images/banner-sample.jpg'))),
                         ),
                       ),
                     );
@@ -212,9 +210,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Text(
                                         'Category',
                                         style: TextStyle(
-                                          fontSize:
-                                              MediaQuery.of(context).size.width *
-                                                  0.035,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.035,
                                           fontWeight: FontWeight.bold,
                                           letterSpacing: 2,
                                         ),
@@ -249,8 +248,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 10,
                   itemBuilder: (context, i) {
                     return Padding(
-                      padding:
-                          const EdgeInsets.only(bottom: 10.0, right: 10, left: 10),
+                      padding: const EdgeInsets.only(
+                          bottom: 10.0, right: 10, left: 10),
                       child: AspectRatio(
                         aspectRatio: 15 / 5,
                         child: Container(
@@ -285,22 +284,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Positioned.fill(
-                                left: 160,
-                                top: -60,
+                                top: 30,
                                 child: Container(
                                   // decoration: BoxDecoration(
                                   //     color: Colors.white,
                                   //     borderRadius: BorderRadius.circular(10)
                                   // ),
                                   child: Align(
-                                      alignment: Alignment.centerLeft,
+                                      alignment: Alignment.topCenter,
                                       child: Text(
                                         'Item Name',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize:
-                                                MediaQuery.of(context).size.width *
-                                                    0.04),
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.04),
                                       )),
                                 ),
                               ),
