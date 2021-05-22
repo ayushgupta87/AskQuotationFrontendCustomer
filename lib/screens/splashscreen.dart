@@ -1,7 +1,18 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:ask_quotation_customer/company_data/company_data.dart';
 import 'package:ask_quotation_customer/company_data/container_data.dart';
+import 'package:ask_quotation_customer/models/user_validate.dart';
+import 'package:ask_quotation_customer/reuseable/network_data.dart';
+import 'package:ask_quotation_customer/screens/Homescreen_dashboard_stack.dart';
+import 'package:ask_quotation_customer/screens/homescreen.dart';
+import 'package:ask_quotation_customer/screens/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,6 +20,142 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String accessToken;
+  String customerUsername;
+  String customerName;
+
+  Future getToken() async {
+    String access_token_is = await validateUser();
+    var customerDetails = await http.get(currentCustomerDetails,
+        headers: {HttpHeaders.authorizationHeader: 'Bearer $access_token_is'});
+    if (jsonDecode(customerDetails.body)['role'] != null){
+      if (jsonDecode(customerDetails.body)['role'] != 'Customer') {
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) {
+              Fluttertoast.showToast(
+                  msg: "Login Required",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 3,
+                  backgroundColor: Colors.black54,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+              return LoginPage();
+            }), (route) => false);
+      }
+    }
+    final getCustomerUsername = jsonDecode(customerDetails.body)['username'];
+    final getCustomerName = jsonDecode(customerDetails.body)['name'];
+
+    setState(() {
+      accessToken = access_token_is;
+      customerUsername = getCustomerUsername;
+      customerName = getCustomerName;
+    });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    try {
+      getToken().whenComplete(() {
+        if (customerUsername != null) {
+          Timer(Duration(seconds: 5), () {
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) {
+                  return HomeScreenDashboard(customerUsername, customerName);
+                }), (route) => false);
+            Fluttertoast.showToast(
+                msg: "Welcome back, $customerName",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 3,
+                backgroundColor: Colors.black87,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          });
+        } else {
+          Timer(Duration(seconds: 5), () {
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) {
+                  return LoginPage();
+                }), (route) => false);
+            Fluttertoast.showToast(
+                msg: "Login to continue",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 3,
+                backgroundColor: Colors.black54,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          });
+        }
+      });
+  } on SocketException catch (e) {
+        Timer(Duration(seconds: 5), () {
+          Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) {
+                return LoginPage();
+              }), (route) => false);
+          Fluttertoast.showToast(
+              msg: "Connectivity error",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 3,
+              backgroundColor: Colors.black54,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        });
+      } on IOException catch (e) {
+      Timer(Duration(seconds: 5), () {
+        Fluttertoast.showToast(
+            msg: "Connectivity error",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) {
+              return LoginPage();
+            }), (route) => false);
+      });
+    } on TimeoutException catch (e) {
+      Fluttertoast.showToast(
+          msg: "Timeout error",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.black54,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
+            return LoginPage();
+          }), (route) => false);
+    } catch (e) {
+      Timer(Duration(seconds: 5), () {
+        Fluttertoast.showToast(
+            msg: "Connectivity error",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 16.0);
+
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) {
+              return LoginPage();
+            }), (route) => false);
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

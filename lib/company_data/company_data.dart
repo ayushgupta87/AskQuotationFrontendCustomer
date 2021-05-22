@@ -1,4 +1,5 @@
-var companyName = 'Kaizen';
+var companyUsername = 'kaizen';
+var companyName = 'Kaizen Innovations';
 var companyShortName = 'Kaizen';
 var companyTagline = 'The right products\nto change your lives';
 var companyPngImage = 'images/companyClearBackgroundLogo.png';

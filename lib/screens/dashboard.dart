@@ -2,9 +2,11 @@ import 'package:ask_quotation_customer/screens/about_us.dart';
 import 'package:ask_quotation_customer/screens/all_products_page.dart';
 import 'package:ask_quotation_customer/screens/contact_us.dart';
 import 'package:ask_quotation_customer/screens/homescreen.dart';
+import 'package:ask_quotation_customer/screens/loginpage.dart';
 import 'package:ask_quotation_customer/screens/shop_be_categories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashBoard extends StatelessWidget {
   String user;
@@ -20,7 +22,7 @@ class DashBoard extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                child: Text(user[0]),
+                child: Text(user[7]),
               ),
               SizedBox(
                 width: 10,
@@ -53,8 +55,9 @@ class DashBoard extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              if (element['title'] == 'All Products'){
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                              if (element['title'] == 'All Products') {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
                                   return AllProductsPage();
                                 }));
                               }
@@ -117,10 +120,23 @@ class DashBoard extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Text(
-                'Log out',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              InkWell(
+                splashColor: Colors.white,
+                onTap: () async {
+                  SharedPreferences sharedpreferences =
+                      await SharedPreferences.getInstance();
+                  await sharedpreferences.remove('customer_access_token');
+                  await sharedpreferences.remove('customer_refresh_token');
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) {
+                    return LoginPage();
+                  }), (route) => false);
+                },
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               )
             ],
           )

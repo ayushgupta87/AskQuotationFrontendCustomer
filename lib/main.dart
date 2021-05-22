@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomescreenDashboard(),
+      home: SplashScreen(),
       title: companyName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
