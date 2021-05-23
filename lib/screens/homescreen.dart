@@ -38,9 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getWishListCount() async {
     var countOfBag;
-    var getWishlistLength = await http.get(getWishlistLength, headers: {HttpHeaders.authorizationHeader: 'Bearer $access_token'});
-    if (getWishlistLength.statusCode == 200){
-      countOfBag = await jsonDecode(getWishlistLength.body)['wishlistCount'];
+    String access_token = await validateUser();
+    var wishlistLength = await http.get(getWishlistLength, headers: {HttpHeaders.authorizationHeader: 'Bearer $access_token'});
+    if (wishlistLength.statusCode == 200){
+      countOfBag = await jsonDecode(wishlistLength.body)['wishlistCount'];
     } else {
       countOfBag = '0';
     }
@@ -96,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     getCategories().whenComplete(() {
       getHomePageImage().whenComplete((){
+        getWishListCount();
         setState(() {
           _saving=false;
         });
