@@ -392,7 +392,7 @@ Widget kCategoryCardView(BuildContext context, int itemCount){
   );
 }
 
-Widget kHomePageTopCategories(BuildContext context, int itemCount){
+Widget kHomePageTopCategories(BuildContext context, int itemCount, List categoryListItems){
   return ListView.builder(
     scrollDirection: Axis.horizontal,
     itemCount: itemCount,
@@ -425,7 +425,7 @@ Widget kHomePageTopCategories(BuildContext context, int itemCount){
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                    'Category',
+                    'categoryListIs[i].categoryName',
                     style: TextStyle(
                       fontSize: MediaQuery.of(context)
                           .size

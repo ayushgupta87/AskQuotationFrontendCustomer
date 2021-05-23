@@ -35,4 +35,4 @@ getProducts(String category, String page){
   var getProducts = requestUrl('kaizen/api/customer/$companyUsername/$category/$page');
   return getProducts;
 }
-var getAllCategories = requestUrl('kaizen/api/customer/$companyUsername');
+var getAllCategories = requestUrl('kaizen/api/customer/getAllCategory/$companyUsername');

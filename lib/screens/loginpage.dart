@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:ask_quotation_customer/company_data/company_data.dart';
 import 'package:ask_quotation_customer/company_data/container_data.dart';
-import 'package:ask_quotation_customer/reuseable/network_data.dart';
+import 'package:ask_quotation_customer/models/network_data.dart';
 import 'package:ask_quotation_customer/reuseable/reusable_widgets.dart';
 import 'package:ask_quotation_customer/screens/Homescreen_dashboard_stack.dart';
 import 'package:ask_quotation_customer/screens/homescreen.dart';
