@@ -27,7 +27,7 @@ var customerMobileVerification = requestUrl('kaizen/api/customer/contactVerifica
 
 var requestCompanyDataAccess = requestUrl('kaizen/api/bothAdmin/allowingCustomer');
 
-var addItemToWishList = requestUrl('kaizen/api/customer/addToWishlist');
+var addItemToWishList = requestUrl('kaizen/api/customer/addToWishlist/$companyUsername');
 var deleteFromWishList = requestUrl('kaizen/api/customer/deleteItemWishlist');
 var updateWishListItemQuantity = requestUrl('kaizen/api/customer/updateQtyWishlist');
 
@@ -36,3 +36,8 @@ getProducts(String category, String page){
   return getProducts;
 }
 var getAllCategories = requestUrl('kaizen/api/customer/getAllCategory/$companyUsername');
+
+var homePageBannerImage = requestUrl('/kaizen/api/customer/getHomePageBannerImage/$companyUsername');
+var getWishlistLength = requestUrl('/kaizen/api/customer/wishlistLength/$companyUsername');
+var checkCompanyStatusBeforeLogin = requestUrl('/kaizen/api/customer/checkCompanyStatus/$companyUsername');
+var getAllPopularProducts = requestUrl('/kaizen/api/customer/getPopularProducts/$companyUsername');

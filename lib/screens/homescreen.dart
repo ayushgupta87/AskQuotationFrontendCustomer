@@ -32,6 +32,22 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isDrawerOpen = false;
 
   List<Categories> categoriesList = [];
+  List<HomePageBannerImage> homePageImageList = [];
+
+  var itemCount = '0';
+
+  getWishListCount() async {
+    var countOfBag;
+    var getWishlistLength = await http.get(getWishlistLength, headers: {HttpHeaders.authorizationHeader: 'Bearer $access_token'});
+    if (getWishlistLength.statusCode == 200){
+      countOfBag = await jsonDecode(getWishlistLength.body)['wishlistCount'];
+    } else {
+      countOfBag = '0';
+    }
+    setState((){
+      itemCount = countOfBag;
+    });
+  }
 
   Future<List<Categories>> getCategories() async {
     String access_token = await validateUser();
@@ -54,12 +70,35 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<List<HomePageBannerImage>> getHomePageImage() async {
+    String access_token = await validateUser();
+    if (access_token != null){
+      var homePageImage = await http.get(homePageBannerImage, headers: {HttpHeaders.authorizationHeader: 'Bearer $access_token'});
+
+      var data = await jsonDecode(homePageImage.body)['homePageImages'];
+      if (data == null) {
+        return null;
+      }
+
+      if (homePageImage.statusCode == 200){
+        for (var item in data){
+          HomePageBannerImage homePageBannerImage = HomePageBannerImage(item['image']);
+          homePageImageList.add(homePageBannerImage);
+        }
+        return homePageImageList;
+      }
+
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     getCategories().whenComplete(() {
-      setState(() {
-        _saving=false;
+      getHomePageImage().whenComplete((){
+        setState(() {
+          _saving=false;
+        });
       });
     });
   }
@@ -162,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 5,
                               ),
                               Text(
-                                '4',
+                                '$itemCount',
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -178,8 +217,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 5,
+                    itemCount: homePageImageList.length,
                     itemBuilder: (context, i) {
+                      Uint8List _bannerImage = base64.decode(homePageImageList[i].image);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AspectRatio(
@@ -193,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 image: DecorationImage(
                                     fit: BoxFit.fill,
                                     image:
-                                        AssetImage('images/banner-sample.jpg'))),
+                                    homePageImageList[i].image == 'None' ? AssetImage('images/banner-sample.jpg') : MemoryImage(_bannerImage))),
                           ),
                         ),
                       );
@@ -252,7 +292,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Color(0xFFCADCED)
-                                                  .withOpacity(0.45)),
+                                                  .withOpacity(0.2)),
                                           child: Text(''),
                                         ),
                                       ),
@@ -311,4 +351,10 @@ class Categories{
   final String categoryImage;
 
   Categories(this.categoryName, this.categoryImage);
+}
+
+class HomePageBannerImage{
+  final String image;
+
+  HomePageBannerImage(this.image);
 }
