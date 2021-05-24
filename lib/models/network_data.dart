@@ -1,14 +1,14 @@
 import 'package:ask_quotation_customer/company_data/company_data.dart';
 
 class URLNetwork {
-  // urlNetwork(){
-  //   var url = '127.0.0.1:5000';
-  //   return url;
-  // }
-  urlNetwork() {
-    var url = '10.0.2.2:5000';
+  urlNetwork(){
+    var url = '127.0.0.1:5000';
     return url;
   }
+  // urlNetwork() {
+  //   var url = '10.0.2.2:5000';
+  //   return url;
+  // }
 }
 
 String uri = URLNetwork().urlNetwork();
