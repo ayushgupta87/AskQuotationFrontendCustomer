@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreenDashboard('Ayush', 'ayush'),
+      home: SingleProductPage('12'),
       title: companyName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

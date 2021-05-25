@@ -42,6 +42,11 @@ getProducts(String category, String page) {
   return getProducts;
 }
 
+getSingleProductDetails(String productId){
+  var getSingleProductDetails = requestUrl('/kaizen/api/customer/$companyUsername/$productId');
+  return getSingleProductDetails;
+}
+
 var getAllCategories =
     requestUrl('kaizen/api/customer/getAllCategory/$companyUsername');
 
